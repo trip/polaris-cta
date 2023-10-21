@@ -1,86 +1,145 @@
 import { LitElement, html, css } from 'lit';
 
-const logo = new URL('../assets/open-wc-logo.svg', import.meta.url).href;
-
 class PolarisCta extends LitElement {
-  static properties = {
-    header: { type: String },
+  static get properties() {
+    return {
+      text: {
+        type: String,
+      },
+
+      link: {
+        type: String,
+      },
+
+      primaryOutlined: {
+        type: Boolean,
+        reflect: true
+      },
+
+      primaryFilled: {
+        type: Boolean,
+        reflect: true
+      },
+
+      tinted: {
+        type: Boolean,
+        reflect: true
+      },
+
+      lightOutlined: {
+        type: Boolean,
+        reflect: true
+      },
+
+      lightFilled: {
+        type: Boolean,
+        reflect: true
+      },
+    }
   }
 
   static styles = css`
     :host {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      font-size: calc(10px + 2vmin);
-      color: #1a2b42;
-      max-width: 960px;
-      margin: 0 auto;
-      text-align: center;
-      background-color: var(--polaris-cta-background-color);
+        display: block;
+        margin: 12px;
     }
 
-    main {
-      flex-grow: 1;
+    .wrapper {
+      height: 48px;
+      padding: 16px;
+      display: inline-flex;
     }
 
-    .logo {
-      margin-top: 36px;
-      animation: app-logo-spin infinite 20s linear;
+    :host([primaryOutlined]) .wrapper,
+    :host([primaryFilled]) .wrapper {
+      background-color: #fff;
     }
 
-    @keyframes app-logo-spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+    :host([tinted]) .wrapper {
+      background-color: #e4e5e7;
     }
 
-    .app-footer {
-      font-size: calc(12px + 0.5vmin);
-      align-items: center;
+    :host([lightOutlined]) .wrapper,
+    :host([lightFilled]) .wrapper {
+      background-color: #011e44;
     }
 
-    .app-footer a {
-      margin-left: 5px;
+    p {
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    :host([primaryOutlined]) p,
+    :host([primaryFilled]) p,
+    :host([tinted]) p {
+      color: black;
+    }
+
+    :host([lightOutlined]) p,
+    :host([lightFilled]) p {
+      color: #fff;
+    }
+
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: .025rem;
+      display: inline-block;
+      margin-left: 32px;
+    }
+
+    :host([primaryOutlined]) a {
+      border: 2px solid #005fa9;
+      background-color: #fff;
+      color: #005fa9;
+      padding: 12px 32px;
+    }
+
+    :host([primaryFilled]) a {
+      border: 2px solid #005fa9;
+      background-color: #005fa9;
+      color: #fff;
+      padding: 12px 32px;
+    }
+
+    :host([tinted]) a {
+      border: 2px solid #fff;
+      background-color: #4f627c;
+      color: #b0e1ff;
+      padding: 12px 32px;
+    }
+
+    :host([lightOutlined]) a {
+      border: 2px solid #fff;
+      background-color: #011e44;
+      color: #a5e7fe;
+      padding: 12px 32px;
+    }
+
+    :host([lightFilled]) a {
+      border: 2px solid #a5e7fe;
+      background-color: #a5e7fe;
+      color: #011e44;
+      padding: 12px 32px;
     }
   `;
 
   constructor() {
     super();
-    this.header = 'My app';
+    this.text = 'Subscribe';
+    this.link = 'https://psu.edu';
   }
 
   render() {
     return html`
-      <main>
-        <div class="logo"><img alt="open-wc logo" src=${logo} /></div>
-        <h1>${this.header}</h1>
-
-        <p>Edit <code>src/PolarisCta.js</code> and save to reload.</p>
-        <a
-          class="app-link"
-          href="https://open-wc.org/guides/developing-components/code-examples/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code examples
-        </a>
-      </main>
-
-      <p class="app-footer">
-        🚽 Made with love by
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/open-wc"
-          >open-wc</a
-        >.
-      </p>
+      <div class="wrapper">
+        <p>GET THE NEWS BY EMAIL</p>
+        <a href="${this.link}"><slot>${this.text}</slot></a>
+      </div>
     `;
   }
 }
