@@ -11,75 +11,32 @@ class PolarisCta extends LitElement {
         type: String,
       },
 
-      primaryOutlined: {
-        type: Boolean,
+      type: {
+        type: String,
         reflect: true
       },
 
-      primaryFilled: {
+      outlined: {
         type: Boolean,
-        reflect: true
       },
 
-      tinted: {
+      filled: {
         type: Boolean,
-        reflect: true
-      },
-
-      lightOutlined: {
-        type: Boolean,
-        reflect: true
-      },
-
-      lightFilled: {
-        type: Boolean,
-        reflect: true
       },
     }
   }
 
   static styles = css`
     :host {
-        display: block;
-        margin: 12px;
-    }
-
-    .wrapper {
-      height: 48px;
-      padding: 16px;
-      display: inline-flex;
-    }
-
-    :host([primaryOutlined]) .wrapper,
-    :host([primaryFilled]) .wrapper {
-      background-color: #fff;
-    }
-
-    :host([tinted]) .wrapper {
-      background-color: #e4e5e7;
-    }
-
-    :host([lightOutlined]) .wrapper,
-    :host([lightFilled]) .wrapper {
-      background-color: #011e44;
-    }
-
-    p {
-      text-transform: uppercase;
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-block;
-    }
-
-    :host([primaryOutlined]) p,
-    :host([primaryFilled]) p,
-    :host([tinted]) p {
-      color: black;
-    }
-
-    :host([lightOutlined]) p,
-    :host([lightFilled]) p {
-      color: #fff;
+      display: block;
+      margin: 12px;
+      --polaris-cta-psu-white: #ffffff;
+      --polaris-cta-psu-gray:#E4E5E7;
+      --polaris-cta-psu-darkgray: #4f627C;
+      --polaris-cta-psu-blue: #1E407C;
+      --polaris-cta-psu-darkblue: #001E44;
+      --polaris-cta-psu-lightblue:#96BEE6;
+      --polaris-cta-psu-black: #000000;
     }
 
     a {
@@ -88,42 +45,79 @@ class PolarisCta extends LitElement {
       font-style: italic;
       font-weight: 700;
       letter-spacing: .025rem;
-      display: inline-block;
       margin-left: 32px;
+      border-radius: 4px;
+      display: inline-flex;
     }
 
-    :host([primaryOutlined]) a {
-      border: 2px solid #005fa9;
-      background-color: #fff;
-      color: #005fa9;
+    :host([type="primary"][outlined]) a {
+      border: 2px solid var(--polaris-cta-psu-blue);
+      background-color: var(--polaris-cta-psu-white);
+      color: var(--polaris-cta-psu-blue);
+      padding: 12px 32px;
+      transition: 0.1s;
+    }
+
+    :host([type="primary"][outlined]) a:focus,
+    :host([type="primary"][outlined]) a:hover {
+      border: 2px solid var(--polaris-cta-psu-blue);
+      background-color: var(--polaris-cta-psu-blue);
+      color: var(--polaris-cta-psu-white);
       padding: 12px 32px;
     }
 
-    :host([primaryFilled]) a {
-      border: 2px solid #005fa9;
-      background-color: #005fa9;
-      color: #fff;
+    :host([type="primary"][filled]) a {
+      border: 2px solid var(--polaris-cta-psu-blue);
+      background-color: var(--polaris-cta-psu-blue);
+      color: var(--polaris-cta-psu-white);
+      padding: 12px 32px;
+      transition: 0.1s;
+    }
+
+    :host([type="primary"][filled]) a:focus,
+    :host([type="primary"][filled]) a:hover {
+      border: 2px solid var(--polaris-cta-psu-blue);
+      background-color: var(--polaris-cta-psu-white);
+      color: var(--polaris-cta-psu-blue);
       padding: 12px 32px;
     }
 
-    :host([tinted]) a {
-      border: 2px solid #fff;
-      background-color: #4f627c;
-      color: #b0e1ff;
+    :host([type="tinted"]) a {
+      border: 2px solid var(--polaris-cta-psu-white);
+      background-color: var(--polaris-cta-psu-darkgray);
+      color: var(--polaris-cta-psu-lightblue);
       padding: 12px 32px;
     }
 
-    :host([lightOutlined]) a {
-      border: 2px solid #fff;
-      background-color: #011e44;
-      color: #a5e7fe;
+    :host([type="light"][outlined]) a {
+      border: 2px solid var(--polaris-cta-psu-white);
+      background-color: var(--polaris-cta-psu-darkblue);
+      color: var(--polaris-cta-psu-lightblue);
+      padding: 12px 32px;
+      transition: 0.1s;
+    }
+
+    :host([type="light"][outlined]) a:focus,
+    :host([type="light"][outlined]) a:hover {
+      border: 2px solid var(--polaris-cta-psu-lightblue);
+      background-color: var(--polaris-cta-psu-lightblue);
+      color: var(--polaris-cta-psu-darkblue);
       padding: 12px 32px;
     }
 
-    :host([lightFilled]) a {
-      border: 2px solid #a5e7fe;
-      background-color: #a5e7fe;
-      color: #011e44;
+    :host([type="light"][filled]) a {
+      border: 2px solid var(--polaris-cta-psu-lightblue);
+      background-color: var(--polaris-cta-psu-lightblue);
+      color: var(--polaris-cta-psu-darkblue);
+      padding: 12px 32px;
+      transition: 0.1s;
+    }
+
+    :host([type="light"][filled]) a:focus,
+    :host([type="light"][filled]) a:hover {
+      border: 2px solid var(--polaris-cta-psu-white);
+      background-color: var(--polaris-cta-psu-darkblue);
+      color: var(--polaris-cta-psu-lightblue);
       padding: 12px 32px;
     }
   `;
@@ -132,14 +126,12 @@ class PolarisCta extends LitElement {
     super();
     this.text = 'Subscribe';
     this.link = 'https://psu.edu';
+    this.type = 'tinted';
   }
 
   render() {
     return html`
-      <div class="wrapper">
-        <p>GET THE NEWS BY EMAIL</p>
-        <a href="${this.link}"><slot>${this.text}</slot></a>
-      </div>
+      <a href="${this.link}"><slot>${this.text}</slot></a>
     `;
   }
 }
